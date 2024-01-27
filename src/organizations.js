@@ -20,11 +20,13 @@ function getOrganisations() {
 }
 
 function getOrganisation(index) {
-  organisations.map((org, key) => {
-    if (index === org.id) {
-      return org.getOrganizationDetails();
-    }
-  });
+  let org = organisations.find(org => org.id === index);
+    return org ? org.getOrganizationDetails() : null;
+  // organisations.map((org, key) => {
+  //   if (index === org.id) {
+  //     return org.getOrganizationDetails();
+  //   }
+  // });
 }
 
 export { createOrganisation, getOrganisation, getOrganisations, organisations };

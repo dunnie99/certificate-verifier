@@ -1,14 +1,17 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
 
-contract Counter {
-    uint256 public number;
+import "../lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
+import "../lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
-    }
+contract Certificate is ERC721, ERC721Burnable, Ownable {
+    constructor(address initialOwner)
+        ERC721("Certificate", "CERT")
+        Ownable(initialOwner)
+    {}
 
-    function increment() public {
-        number++;
+    function safeMint(address to, uint256 tokenId) public {
+        _safeMint(to, tokenId);
     }
 }
